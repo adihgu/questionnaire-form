@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular Întrebări</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .intrebare {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .butoane {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .buton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #buton-nu {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="intrebare" id="intrebare">Întrebarea 1: De ziua noastră, Vio își cumpără cadouri pentru ea?</div>
+        <div class="butoane">
+            <button class="buton" onclick="nextQuestion()">DA</button>
+            <button class="buton" id="buton-nu" onclick="nextOrMove()">NU</button>
+        </div>
+    </div>
+
+    <script>
+        const intrebari = [
+            "De ziua noastră, Vio își cumpără cadouri pentru ea?",
+            "Andrei zice că e mai bun decât John la FIFA! Credeți că este adevărat?",
+            "Credeți că i-a fost greu lui Andrei să iasă din casă și să vină la Brașov?",
+            "Credeți că o să-l lase Alina pe Andrei vreodată să se joace fără să comenteze?",
+            "Credeți că o să ia Andrei carnetul anul ăsta?",
+            "Vreți să fiți nașii noștri?"
+        ];
+
+        let index = 0;
+        const intrebareEl = document.getElementById("intrebare");
+        const butonNu = document.getElementById("buton-nu");
+
+        function nextQuestion() {
+            index++;
+            if (index < intrebari.length) {
+                intrebareEl.textContent = `Întrebarea ${index + 1}: ${intrebari[index]}`;
+            } else {
+                finalScreen();
+            }
+        }
+
+        function nextOrMove() {
+            if (index === intrebari.length - 1) {
+                moveButtonNu();
+            } else {
+                nextQuestion();
+            }
+        }
+
+        function moveButtonNu() {
+            const x = Math.random() * 50 - 25; // Mutare ușoară orizontală
+            const y = Math.random() * 20 - 10; // Mutare ușoară verticală
+            butonNu.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function finalScreen() {
+            document.getElementById("container").innerHTML = `
+                <div class="intrebare">Muchas gracias aficion, esto es para vosotros! SSUUUUUIIIIIIIII</div>
+            `;
+        }
+    </script>
+</body>
+</html>
